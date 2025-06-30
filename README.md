@@ -65,18 +65,19 @@ https://github.com/massandr/threat-hunting-scenario-TOR/blob/176cc37a6789b99d013
 
 ### 3. Searched the `DeviceProcessEvents` Table for TOR Browser Execution
 
-Searched for any indication that user "employee" actually opened the TOR browser. There was evidence that they did open it at `2024-11-08T22:17:21.6357935Z`. There were several other instances of `firefox.exe` (TOR) as well as `tor.exe` spawned afterwards.
+Searched for any indications that user “massadmin” launched Tor browser on his machine. At `2025-05-16T03:37:44.4936257Z` file `firefox.exe` from the folder “C:\Users\massadmin\Desktop\Tor Browser\Browser\firefox.exe” was opened. After that multiple processes with `firefox.exe` and `tor.exe` were started, which can indicate that the browser was launched.
 
 **Query used to locate events:**
 
 ```kql
-DeviceProcessEvents  
-| where DeviceName == "threat-hunt-lab"  
-| where FileName has_any ("tor.exe", "firefox.exe", "tor-browser.exe")  
-| project Timestamp, DeviceName, AccountName, ActionType, FileName, FolderPath, SHA256, ProcessCommandLine  
+DeviceProcessEvents
+| where DeviceName == "massandr-new-vm"
+| where FileName has_any ("tor.exe", "firefox.exe", "tor-browser.exe")
+| project Timestamp, ActionType, DeviceName, FileName, FolderPath, SHA256, AccountName, ProcessCommandLine
 | order by Timestamp desc
 ```
-<img width="1212" alt="image" src="https://github.com/user-attachments/assets/b13707ae-8c2d-4081-a381-2b521d3a0d8f">
+Query results - [3-Tor-launched.csv](https://github.com/massandr/threat-hunting-scenario-TOR/blob/main/3-Tor-launched.csv)
+https://github.com/massandr/threat-hunting-scenario-TOR/blob/538f3a9ee953e133794ba7632130fb8955a7c6b4/3-Tor-launched.csv#L38-L44
 
 ---
 
