@@ -39,6 +39,8 @@ DeviceFileEvents
 | project Timestamp, DeviceName, ActionType, FileName, FolderPath, SHA256, Account=InitiatingProcessAccountName
 | order by Timestamp desc
 ```
+[1-Tor-download.csv](https://github.com/massandr/threat-hunting-scenario-TOR/blob/main/1-Tor-download.csv)
+https://github.com/massandr/threat-hunting-scenario-TOR/blob/f96ed16865b75cec8800011f4f8e80307a981173/1-Tor-download.csv#L7
 https://github.com/massandr/threat-hunting-scenario-TOR/blob/f96ed16865b75cec8800011f4f8e80307a981173/1-Tor-download.csv#L47-L49
 
 ---
