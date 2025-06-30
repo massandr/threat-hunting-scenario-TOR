@@ -102,9 +102,7 @@ https://github.com/massandr/threat-hunting-scenario-TOR/blob/aabc77b99bad6dc1bc2
 ## Chronological Timeline of Events
 
 **Timestamp:** 2025-05-16 03:34:08Z
-
 **Event:** Tor Browser installer file detected.
-
 **Details:** The file tor-browser-windows-x86_64-portable-14.5.1.exe appeared on the device massandr-new-vm. This action was initiated by the account massadmin. This is the first indication of the Tor Browser software being introduced to the system.
 
 
