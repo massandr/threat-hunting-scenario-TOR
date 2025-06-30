@@ -101,32 +101,41 @@ https://github.com/massandr/threat-hunting-scenario-TOR/blob/aabc77b99bad6dc1bc2
 ---
 ## Chronological Timeline of Events
 
-**Timestamp:** 2025-05-16 03:34:08Z
-**Event:** Tor Browser installer file detected.
-**Details:** The file tor-browser-windows-x86_64-portable-14.5.1.exe appeared on the device massandr-new-vm. This action was initiated by the account massadmin. This is the first indication of the Tor Browser software being introduced to the system.
+### 1. File Download - TOR Installer
 
+- **Timestamp:** 2025-05-16 03:34:08Z
+- **Event:** Tor Browser installer file detected.
+- **Details:** The file tor-browser-windows-x86_64-portable-14.5.1.exe appeared on the device massandr-new-vm. This action was initiated by the account massadmin. This is the first indication of the Tor Browser software being introduced to the system.
 
-**Timestamp:** 2025-05-16 03:37:02Z
-**Event:** Tor Browser installer executed.
-**Details:** The process tor-browser-windows-x86_64-portable-14.5.1.exe was started with the command line argument /S. This indicates a silent installation of the Tor Browser by the user massadmin.
+### 2. Process Execution - TOR Browser Installation
 
-**Timestamp:** 2025-05-16 03:37:44Z
-**Event:** Tor Browser launched.
-**Details:** The file firefox.exe located at C:\Users\massadmin\Desktop\Tor Browser\Browser\firefox.exe was opened. Following this, multiple processes associated with firefox.exe (the Tor Browser executable) and tor.exe (the Tor network client) were initiated by massadmin. This signifies the Tor Browser application being actively started.
+- **Timestamp:** 2025-05-16 03:37:02Z
+- **Event:** Tor Browser installer executed.
+- **Details:** The process tor-browser-windows-x86_64-portable-14.5.1.exe was started with the command line argument /S. This indicates a silent installation of the Tor Browser by the user massadmin.
 
-**Timestamp:** 2025-05-16 03:37:50Z
-**Event:** Tor Browser establishes local proxy connection.
-**Details:** A network connection was successfully established by the firefox.exe process (Tor Browser). The connection was made to the local address 127.0.0.1 on port 9151. This port is commonly used by Tor Browser for its internal proxy communication with the Tor client, confirming the browser was active and attempting to route traffic through the Tor network. Several other related connections were also observed around this time.
+### 3. Process Execution - TOR Browser Launch
 
-**Timestamp:** 2025-05-20 15:29:22Z
-**Event:** Potentially related text file found.
-**Details:** A file named wtb-tor.txt was found on the system, associated with the user massadmin. While the contents are unknown, its name and timestamp (occurring after initial Tor activity) make it noteworthy in the context of Tor usage.
+- **Timestamp:** 2025-05-16 03:37:44Z
+- **Event:** Tor Browser launched.
+- **Details:** The file firefox.exe located at C:\Users\massadmin\Desktop\Tor Browser\Browser\firefox.exe was opened. Following this, multiple processes associated with firefox.exe (the Tor Browser executable) and tor.exe (the Tor network client) were initiated by massadmin. This signifies the Tor Browser application being actively started.
+
+### 4. Network Connection - TOR Network
+
+- **Timestamp:** 2025-05-16 03:37:50Z
+- **Event:** Tor Browser establishes connection.
+- **Details:** A network connection was successfully established by the firefox.exe process (Tor Browser). The connection was made to the local address 127.0.0.1 on port 9151. This port is commonly used by Tor Browser for its internal proxy communication with the Tor client, confirming the browser was active and attempting to route traffic through the Tor network. Several other related connections were also observed around this time.
+
+### 5. File Creation - wtb-tor.txt
+
+- **Timestamp:** 2025-05-20 15:29:22Z
+- **Event:** Potentially related text file found.
+- **Details:** A file named wtb-tor.txt was found on the system, associated with the user massadmin. While the contents are unknown, its name and timestamp (occurring after initial Tor activity) make it noteworthy in the context of Tor usage.
 
 ---
 
 ## Summary
 
-The user "massadmin" on the "massandr-new-vm" device initiated and completed the installation of the TOR browser. They proceeded to launch the browser, establish connections within the TOR network, and created various files related to TOR on their desktop, including a file named `wtb-tor.txt`. This sequence of activities indicates that the user actively installed, configured, and used the TOR browser, likely for anonymous browsing purposes, with possible documentation in the form of the "wtb-tor" file.
+The user `massadmin` on the `massandr-new-vm` device initiated and completed the installation of the TOR browser. They proceeded to launch the browser, establish connections within the TOR network, and created various files related to TOR on their desktop, including a file named `wtb-tor.txt`. This sequence of activities indicates that the user actively installed, configured, and used the TOR browser, likely for anonymous browsing purposes, with possible documentation in the form of the "wtb-tor" file.
 
 ---
 
