@@ -40,8 +40,8 @@ DeviceFileEvents
 | order by Timestamp desc
 ```
 Query results - [1-Tor-download.csv](https://github.com/massandr/threat-hunting-scenario-TOR/blob/main/1-Tor-download.csv)
-https://github.com/massandr/threat-hunting-scenario-TOR/blob/f96ed16865b75cec8800011f4f8e80307a981173/1-Tor-download.csv#L7
 https://github.com/massandr/threat-hunting-scenario-TOR/blob/f96ed16865b75cec8800011f4f8e80307a981173/1-Tor-download.csv#L47-L49
+https://github.com/massandr/threat-hunting-scenario-TOR/blob/f96ed16865b75cec8800011f4f8e80307a981173/1-Tor-download.csv#L7
 
 ---
 
@@ -60,6 +60,7 @@ DeviceProcessEvents
 ```
 Query results - [2-Tor-installer-launched.csv](https://github.com/massandr/threat-hunting-scenario-TOR/blob/main/2-Tor-installer-launched.csv)
 https://github.com/massandr/threat-hunting-scenario-TOR/blob/176cc37a6789b99d0138104092b856eb0400d99c/2-Tor-installer-launched.csv#L2
+
 ---
 
 ### 3. Searched the `DeviceProcessEvents` Table for TOR Browser Execution
