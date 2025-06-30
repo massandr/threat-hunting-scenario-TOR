@@ -83,80 +83,54 @@ https://github.com/massandr/threat-hunting-scenario-TOR/blob/538f3a9ee953e133794
 
 ### 4. Searched the `DeviceNetworkEvents` Table for TOR Network Connections
 
-Searched for any indication the TOR browser was used to establish a connection using any of the known TOR ports. At `2024-11-08T22:18:01.1246358Z`, an employee on the "threat-hunt-lab" device successfully established a connection to the remote IP address `176.198.159.33` on port `9001`. The connection was initiated by the process `tor.exe`, located in the folder `c:\users\employee\desktop\tor browser\browser\torbrowser\tor\tor.exe`. There were a couple of other connections to sites over port `443`.
+Searched for any indications of TOR browser usage through establishing connection via known TOR ports. `2025-05-16T03:37:50.7357034Z`, on a computer called "massandr-new-vm," a user named "massadmin" successfully established a connection. This connection originated from the "firefox.exe" program and was directed to the computer itself (specifically, its local address 127.0.0.1) on port `9151`. There were few other connections. This event strongly suggests that the Tor Browser was running and active on the "massandr-new-vm" computer. 
 
 **Query used to locate events:**
 
 ```kql
-DeviceNetworkEvents  
-| where DeviceName == "threat-hunt-lab"  
-| where InitiatingProcessAccountName != "system"  
-| where InitiatingProcessFileName in ("tor.exe", "firefox.exe")  
-| where RemotePort in ("9001", "9030", "9040", "9050", "9051", "9150", "80", "443")  
-| project Timestamp, DeviceName, InitiatingProcessAccountName, ActionType, RemoteIP, RemotePort, RemoteUrl, InitiatingProcessFileName, InitiatingProcessFolderPath  
-| order by Timestamp desc
+DeviceNetworkEvents
+| where DeviceName == "massandr-new-vm"
+| project Timestamp, DeviceName, InitiatingProcessAccountName, ActionType, RemoteIP, RemotePort, RemoteUrl, InitiatingProcessFileName
+| where RemotePort in ("9001", "9030", "9040", "9050", "9051", "9150", "9151", "80", "443")
+| where InitiatingProcessFileName has_any ("tor", "firefox")
+| order by Timestamp
 ```
-<img width="1212" alt="image" src="https://github.com/user-attachments/assets/87a02b5b-7d12-4f53-9255-f5e750d0e3cb">
+Query results - [4-Tor-connection.csv](https://github.com/massandr/threat-hunting-scenario-TOR/blob/main/4-Tor-connection.csv)
+https://github.com/massandr/threat-hunting-scenario-TOR/blob/aabc77b99bad6dc1bc2fae4b42e7cd8617b46830/4-Tor-connection.csv#L8-L11
 
 ---
+## Chronological Timeline of Events
 
-## Chronological Event Timeline 
+**Timestamp:** 2025-05-16 03:34:08Z
+**Event:** Tor Browser installer file detected.
+**Details:** The file tor-browser-windows-x86_64-portable-14.5.1.exe appeared on the device massandr-new-vm. This action was initiated by the account massadmin. This is the first indication of the Tor Browser software being introduced to the system.
 
-### 1. File Download - TOR Installer
+**Timestamp:** 2025-05-16 03:37:02Z
+**Event:** Tor Browser installer executed.
+**Details:** The process tor-browser-windows-x86_64-portable-14.5.1.exe was started with the command line argument /S. This indicates a silent installation of the Tor Browser by the user massadmin.
 
-- **Timestamp:** `2024-11-08T22:14:48.6065231Z`
-- **Event:** The user "employee" downloaded a file named `tor-browser-windows-x86_64-portable-14.0.1.exe` to the Downloads folder.
-- **Action:** File download detected.
-- **File Path:** `C:\Users\employee\Downloads\tor-browser-windows-x86_64-portable-14.0.1.exe`
+**Timestamp:** 2025-05-16 03:37:44Z
+**Event:** Tor Browser launched.
+**Details:** The file firefox.exe located at C:\Users\massadmin\Desktop\Tor Browser\Browser\firefox.exe was opened. Following this, multiple processes associated with firefox.exe (the Tor Browser executable) and tor.exe (the Tor network client) were initiated by massadmin. This signifies the Tor Browser application being actively started.
 
-### 2. Process Execution - TOR Browser Installation
+**Timestamp:** 2025-05-16 03:37:50Z
+**Event:** Tor Browser establishes local proxy connection.
+**Details:** A network connection was successfully established by the firefox.exe process (Tor Browser). The connection was made to the local address 127.0.0.1 on port 9151. This port is commonly used by Tor Browser for its internal proxy communication with the Tor client, confirming the browser was active and attempting to route traffic through the Tor network. Several other related connections were also observed around this time.
 
-- **Timestamp:** `2024-11-08T22:16:47.4484567Z`
-- **Event:** The user "employee" executed the file `tor-browser-windows-x86_64-portable-14.0.1.exe` in silent mode, initiating a background installation of the TOR Browser.
-- **Action:** Process creation detected.
-- **Command:** `tor-browser-windows-x86_64-portable-14.0.1.exe /S`
-- **File Path:** `C:\Users\employee\Downloads\tor-browser-windows-x86_64-portable-14.0.1.exe`
-
-### 3. Process Execution - TOR Browser Launch
-
-- **Timestamp:** `2024-11-08T22:17:21.6357935Z`
-- **Event:** User "employee" opened the TOR browser. Subsequent processes associated with TOR browser, such as `firefox.exe` and `tor.exe`, were also created, indicating that the browser launched successfully.
-- **Action:** Process creation of TOR browser-related executables detected.
-- **File Path:** `C:\Users\employee\Desktop\Tor Browser\Browser\TorBrowser\Tor\tor.exe`
-
-### 4. Network Connection - TOR Network
-
-- **Timestamp:** `2024-11-08T22:18:01.1246358Z`
-- **Event:** A network connection to IP `176.198.159.33` on port `9001` by user "employee" was established using `tor.exe`, confirming TOR browser network activity.
-- **Action:** Connection success.
-- **Process:** `tor.exe`
-- **File Path:** `c:\users\employee\desktop\tor browser\browser\torbrowser\tor\tor.exe`
-
-### 5. Additional Network Connections - TOR Browser Activity
-
-- **Timestamps:**
-  - `2024-11-08T22:18:08Z` - Connected to `194.164.169.85` on port `443`.
-  - `2024-11-08T22:18:16Z` - Local connection to `127.0.0.1` on port `9150`.
-- **Event:** Additional TOR network connections were established, indicating ongoing activity by user "employee" through the TOR browser.
-- **Action:** Multiple successful connections detected.
-
-### 6. File Creation - TOR Shopping List
-
-- **Timestamp:** `2024-11-08T22:27:19.7259964Z`
-- **Event:** The user "employee" created a file named `tor-shopping-list.txt` on the desktop, potentially indicating a list or notes related to their TOR browser activities.
-- **Action:** File creation detected.
-- **File Path:** `C:\Users\employee\Desktop\tor-shopping-list.txt`
+**Timestamp:** 2025-05-20 15:29:22Z
+**Event:** Potentially related text file found.
+**Details:** A file named wtb-tor.txt was found on the system, associated with the user massadmin. While the contents are unknown, its name and timestamp (occurring after initial Tor activity) make it noteworthy in the context of Tor usage.
 
 ---
 
 ## Summary
 
-The user "employee" on the "threat-hunt-lab" device initiated and completed the installation of the TOR browser. They proceeded to launch the browser, establish connections within the TOR network, and created various files related to TOR on their desktop, including a file named `tor-shopping-list.txt`. This sequence of activities indicates that the user actively installed, configured, and used the TOR browser, likely for anonymous browsing purposes, with possible documentation in the form of the "shopping list" file.
+The user "massadmin" on the "massandr-new-vm" device initiated and completed the installation of the TOR browser. They proceeded to launch the browser, establish connections within the TOR network, and created various files related to TOR on their desktop, including a file named `wtb-tor.txt`. This sequence of activities indicates that the user actively installed, configured, and used the TOR browser, likely for anonymous browsing purposes, with possible documentation in the form of the "wtb-tor" file.
 
 ---
 
 ## Response Taken
 
-TOR usage was confirmed on the endpoint `threat-hunt-lab` by the user `employee`. The device was isolated, and the user's direct manager was notified.
+TOR usage was confirmed on the endpoint `massandr-new-vm` by the user `massadmin`. The device was isolated, and the user's direct manager was notified.
 
 ---
