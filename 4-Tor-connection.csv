@@ -1,0 +1,11 @@
+﻿Timestamp,DeviceName,InitiatingProcessAccountName,ActionType,RemoteIP,RemotePort,RemoteUrl,InitiatingProcessFileName
+"May 20, 2025 11:25:55 AM",massandr-new-vm,massadmin,ConnectionSuccess,127.0.0.1,9150,,firefox.exe
+"May 20, 2025 11:25:55 AM",massandr-new-vm,massadmin,ConnectionSuccess,23.19.255.161,443,,tor.exe
+"May 20, 2025 11:25:48 AM",massandr-new-vm,massadmin,ConnectionSuccess,212.79.125.20,443,,tor.exe
+"May 20, 2025 11:25:40 AM",massandr-new-vm,massadmin,ConnectionSuccess,127.0.0.1,9151,,firefox.exe
+"May 20, 2025 11:25:38 AM",massandr-new-vm,massadmin,ConnectionFailed,127.0.0.1,9151,,firefox.exe
+"May 15, 2025 11:40:04 PM",massandr-new-vm,massadmin,ConnectionSuccess,127.0.0.1,9150,,firefox.exe
+"May 15, 2025 11:39:54 PM",massandr-new-vm,massadmin,ConnectionSuccess,212.79.125.20,443,https://www.k3q35im2bvw4qnhfty2l.com,tor.exe
+"May 15, 2025 11:39:54 PM",massandr-new-vm,massadmin,ConnectionSuccess,212.79.125.20,443,,tor.exe
+"May 15, 2025 11:38:19 PM",massandr-new-vm,massadmin,ConnectionFailed,127.0.0.1,9150,,firefox.exe
+"May 15, 2025 11:37:50 PM",massandr-new-vm,massadmin,ConnectionSuccess,127.0.0.1,9151,,firefox.exe

@@ -1,0 +1,2 @@
+﻿Timestamp,ActionType,DeviceName,FileName,FolderPath,SHA256,AccountName,ProcessCommandLine
+"May 15, 2025 11:37:02 PM",ProcessCreated,massandr-new-vm,tor-browser-windows-x86_64-portable-14.5.1.exe,C:\Users\massadmin\Downloads\tor-browser-windows-x86_64-portable-14.5.1.exe,f563f1d863b08dd0bfe0435049865a9f74ec2d090995d2a73b70161bb2f34f10,massadmin,tor-browser-windows-x86_64-portable-14.5.1.exe  /S
