@@ -39,7 +39,7 @@ DeviceFileEvents
 | project Timestamp, DeviceName, ActionType, FileName, FolderPath, SHA256, Account=InitiatingProcessAccountName
 | order by Timestamp desc
 ```
-[1-Tor-download.csv](https://github.com/massandr/threat-hunting-scenario-TOR/blob/main/1-Tor-download.csv)
+Query results - [1-Tor-download.csv](https://github.com/massandr/threat-hunting-scenario-TOR/blob/main/1-Tor-download.csv)
 https://github.com/massandr/threat-hunting-scenario-TOR/blob/f96ed16865b75cec8800011f4f8e80307a981173/1-Tor-download.csv#L7
 https://github.com/massandr/threat-hunting-scenario-TOR/blob/f96ed16865b75cec8800011f4f8e80307a981173/1-Tor-download.csv#L47-L49
 
@@ -47,19 +47,19 @@ https://github.com/massandr/threat-hunting-scenario-TOR/blob/f96ed16865b75cec880
 
 ### 2. Searched the `DeviceProcessEvents` Table
 
-Searched for any `ProcessCommandLine` that contained the string "tor-browser-windows-x86_64-portable-14.0.1.exe". Based on the logs returned, at `2024-11-08T22:16:47.4484567Z`, an employee on the "threat-hunt-lab" device ran the file `tor-browser-windows-x86_64-portable-14.0.1.exe` from their Downloads folder, using a command that triggered a silent installation.
+Searched for any `ProcessCommandLine` that contained the string “tor-browser-windows-x86_64-portable-14.5.1.exe”. Found process with command line “tor-browser-windows-x86_64-portable-14.5.1.exe  /S” started `2025-05-16T03:37:02.3446276Z`, which means user “massandr” executed tor installer file using a command that triggered a silent installation.
 
 **Query used to locate event:**
 
 ```kql
-
-DeviceProcessEvents  
-| where DeviceName == "threat-hunt-lab"  
-| where ProcessCommandLine contains "tor-browser-windows-x86_64-portable-14.0.1.exe"  
-| project Timestamp, DeviceName, AccountName, ActionType, FileName, FolderPath, SHA256, ProcessCommandLine
+DeviceProcessEvents
+| where DeviceName == "massandr-new-vm"
+| where ProcessCommandLine contains "tor-browser-windows-x86_64-portable-14.5.1.exe"
+| project Timestamp, ActionType, DeviceName, FileName, FolderPath, SHA256, AccountName, ProcessCommandLine
+| order by Timestamp desc
 ```
-<img width="1212" alt="image" src="https://github.com/user-attachments/assets/b07ac4b4-9cb3-4834-8fac-9f5f29709d78">
-
+Query results - [2-Tor-installer-launched.csv](https://github.com/massandr/threat-hunting-scenario-TOR/blob/main/2-Tor-installer-launched.csv)
+https://github.com/massandr/threat-hunting-scenario-TOR/blob/176cc37a6789b99d0138104092b856eb0400d99c/2-Tor-installer-launched.csv#L2
 ---
 
 ### 3. Searched the `DeviceProcessEvents` Table for TOR Browser Execution
