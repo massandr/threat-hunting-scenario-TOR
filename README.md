@@ -1,4 +1,5 @@
-<img width="400" src="https://placehold.co/400x200/cccccc/333333?text=Lurker%20Scenario%20Logo" alt="Placeholder image for Lurker Scenario Logo"/>
+
+<img width="1024" height="1024" alt="image" src="https://github.com/user-attachments/assets/0d4ebb74-58c6-4e12-8b15-862a463a707e" />
 
 # Threat Hunt Report: The Lurker Scenario
 
