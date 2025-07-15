@@ -3,7 +3,7 @@
 # Threat Hunt Report: The Lurker Scenario
 
 **Date of Hunt:** July 5 - July 12, 2025
-**Threat Hunter:** \[massandr\]
+**Threat Hunter:** [Andrey Massalskiy]
 
 ---
 
